@@ -1,5 +1,8 @@
 using Microsoft.Extensions.Configuration;
 using System.IO;
+using System.Data.SqlClient;
+using Pizzas.API.Helpers;
+using System;
 
 namespace Pizzas.API.Utils {
     public class BD {
