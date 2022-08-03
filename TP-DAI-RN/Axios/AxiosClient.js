@@ -1,43 +1,22 @@
 import axios from "axios";
-import {TokenService} from '../services/TokenServices.js';
 
-TokenService.getToken();
-
-const axiosClient = axios.create ({
-    basedURL:"https://conapp2.herokuapp.com/",
-
+const axiosClient = axios.create({
+    baseURL: "http://challenge-react.alkemy.org/"
 })
 
-export const createUsuario = async () => {
-    return axiosClient.post('/rubro', {
-        headers: {
-            Authorization: 'Bearer ' + TokenService.getToken()
-        }
-    }).then(response => {
-        if(response.status < 300) {
+export const PostLogIn= async (userState) =>{
+    return axiosClient.post('', {
+        ...userState
+    }).then(response =>{
+        if(response.status < 300){
             return response.data
-    } else {
-        console.log("La llamada salio bien")
-    }
-    }).catch(error => {
-        console.log(error);
-        return error;
-    });
-}
-
-export const getRubro = async () => {
-    return axiosClient.post('/rubro', {
-        headers: {
-            Authorization: 'Bearer ' + TokenService.getToken()
         }
-    }).then(response => {
-        if(response.status < 300) {
-            return response.data
-    } else {
-        console.log("La llamada salio bien")
-    }
-    }).catch(error => {
-        console.log(error);
-        return error;
-    });
+        else {
+            console.log("Algo no funciona")
+        }
+    })
+    .catch(function(err) {
+        console.log("No funciona", err)
+        throw err
+    })
 }

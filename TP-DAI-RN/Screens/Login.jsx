@@ -3,11 +3,16 @@ import { StyleSheet, Text, View, TextInput} from 'react-native';
 import BotonIniciarSesion from "../components/BotonIniciarSesion";
 import axios from 'axios';
 import { useNavigation } from '@react-navigation/native';
+import { PostLogIn } from '../Axios/AxiosClient';
 
 const Login =({navigation})=>{
 
-    const [email, onChangeEmail] = React.useState(null);
-    const [password, onChangePassword] = React.useState(null);
+  const [userState, setUserState] = useState({
+    email: '',
+    password: '',
+});
+
+    const [error, setError] = React.useState(false);
 
   return (
     
@@ -17,26 +22,34 @@ const Login =({navigation})=>{
 
               <TextInput   
                 style={styles.input}
-                onChangeText={onChangeEmail}
-                value={email}
+                value={userState.email}
                 placeholder="Correo Electronico"
+                onChangeText={text => setUserState({ ...userState, email: text })}
             />
 
              <TextInput   
                 style={styles.input}
-                onChangeText={onChangePassword}
-                value={password}
+                value={userState.password}
                 placeholder="Contraseña"
+                onChangeText={text => setUserState({ ...userState, password: text })}
             />
-       
+            {error && <Text style={styles.alerta}>Error</Text>}
 
         <BotonIniciarSesion style={{ fontSize: 48}}
-          text="INICIAR SESION" 
-          onPress={ () =>{
-            console.log(email)
-            console.log(password)
-          navigation.navigate('')
-        }}
+          text="ENVIAR" 
+          onPress={async () =>{
+            if (userState.email==''||userState.password==''){
+              setError(true)
+            }
+              else {
+                await PostLogIn(userState).then(() => {
+                    navigation.navigate('Home')
+                })
+                .catch(() => {
+                  console.log("Datos mal")
+                  setError(true)
+              });
+        }}}
         />
     </View>
     
@@ -64,6 +77,14 @@ const styles = StyleSheet.create({
           padding:'3%',
           top: '8%',
         },
-   
+
+        alerta: {
+          top: '80%',
+          marginLeft:'-13%',
+          fontSize: 34,
+          marginRight: 'auto',
+          marginLeft: 'auto',
+          color: 'red',
+          },
         
   });
