@@ -1,14 +1,14 @@
 import React from 'react';
-import { Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { Text, StyleSheet, TouchableOpacity, Button } from 'react-native';
 
 const BotonIniciarSesionInicio = (props) => {
 
-    const { onPress, text } = props
+    const { onPress, text, disable } = props
 
     return (
     
         <TouchableOpacity
-
+            disabled={disable}
             style={styles.boton1}
             onPress={onPress}
         >
@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
         borderColor: 'black',
         borderRadius: 70,
         padding: 12,
-        marginTop:'97%',
+        marginTop:'10%',
         width: '47%'
     },
 

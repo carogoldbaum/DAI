@@ -13,6 +13,8 @@ const Login =({navigation})=>{
 });
 
     const [error, setError] = React.useState(false);
+    const [disable, setDisable] = React.useState(false);
+
 
   return (
     
@@ -33,21 +35,25 @@ const Login =({navigation})=>{
                 placeholder="Contraseña"
                 onChangeText={text => setUserState({ ...userState, password: text })}
             />
-            {error && <Text style={styles.alerta}>Error</Text>}
+            {error && <Text style={styles.alerta}>Error, datos incorrectos</Text>}
 
         <BotonIniciarSesion style={{ fontSize: 48}}
+          disable={disable}
           text="ENVIAR" 
           onPress={async () =>{
+            setDisable(true)
             if (userState.email==''||userState.password==''){
               setError(true)
             }
               else {
                 await PostLogIn(userState).then(() => {
                     navigation.navigate('Home')
+                    setDisable(false)
                 })
                 .catch(() => {
                   console.log("Datos mal")
                   setError(true)
+                  setDisable(false)
               });
         }}}
         />

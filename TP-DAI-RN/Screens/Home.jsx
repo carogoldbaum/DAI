@@ -5,14 +5,10 @@ import axios from 'axios';
 import { useNavigation } from '@react-navigation/native';
 
 const Home =({navigation})=>{
-
-   
-
   return (
     
     <View>
 
-           
     </View>
     
   );
