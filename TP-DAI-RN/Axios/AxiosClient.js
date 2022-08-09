@@ -20,3 +20,15 @@ export const PostLogIn= async (userState) =>{
         throw err
     })
 }
+
+export const GetPlatos= async (PlatoBuscado) =>{
+    return axiosClient
+    .get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKey}&query=${PlatoBuscado}`,{})
+    .then(function(res){
+        console.log(res.data.results)
+        return res.data.results
+    })
+    .catch(function(){
+        throw "Error"
+    })
+}

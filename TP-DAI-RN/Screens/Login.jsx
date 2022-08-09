@@ -1,7 +1,6 @@
 import React, { Component, useEffect, useState } from 'react';
 import { StyleSheet, Text, View, TextInput} from 'react-native';
 import BotonIniciarSesion from "../components/BotonIniciarSesion";
-import axios from 'axios';
 import { useNavigation } from '@react-navigation/native';
 import { PostLogIn } from '../Axios/AxiosClient';
 
@@ -47,15 +46,18 @@ const Login =({navigation})=>{
             }
               else {
                 await PostLogIn(userState).then(() => {
-                    navigation.navigate('Home')
                     setDisable(false)
+                    navigation.navigate('Home')
+                  
                 })
                 .catch(() => {
                   console.log("Datos mal")
                   setError(true)
                   setDisable(false)
               });
-        }}}
+            
+        }setDisable(false)
+      }}  
         />
     </View>
     

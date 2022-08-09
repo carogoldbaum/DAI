@@ -1,41 +1,83 @@
-import React from 'react';
-import { SectionList, StyleSheet, Text, View } from 'react-native';
+import React, { Component, useEffect, useState, FlatList } from 'react';
+import { StyleSheet, Text, View, TextInput} from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { GetPlatos } from '../Axios/AxiosClient';
+import Marvel from '../Components/ListaPlatos';
 
-const SectionListBasics = () => {
-    return (
-      <View style={styles.container}>
-        <SectionList
-          sections={[
-            {title: 'D', data: ['Devin', 'Dan', 'Dominic']},
-            {title: 'J', data: ['Jackson', 'James', 'Jillian', 'Jimmy', 'Joel', 'John', 'Julie']},
-          ]}
-          renderItem={({item}) => <Text style={styles.item}>{item}</Text>}
-          renderSectionHeader={({section}) => <Text style={styles.sectionHeader}>{section.title}</Text>}
-          keyExtractor={(item, index) => `basicListEntry-${item.title}`}
-        />
-      </View>
-    );
+const Home =({navigation})=>{
+
+  const [userState, setUserState] = useState({
+    plato: ''
+});
+
+  return (
+    
+    <View>
+
+            <Text style={styles.titulo}>Buscador de Platos</Text>
+
+              <TextInput   
+                style={styles.input}
+                value={userState.plato}
+                placeholder="Ingrese plato"
+                onChangeText={text => setUserState({ ...userState, plato: text})}
+            />
+            
+          <Marvel
+          onPress={async () =>{
+            
+            if (userState.plato==''){
+              setError(true)
+            }
+              else {
+                await GetPlatos(userState).then(() => {
+                  
+                    navigation.navigate('Login')
+                  
+                })
+                .catch(() => {
+                  console.log("Datos mal")
+                  setError(true)
+                  
+              });
+            
+        }
+      }}  
+            />
+    </View>
+    
+  );
 }
 
-export default SectionListBasics;
+export default Home
 
 const styles = StyleSheet.create({
-  container: {
-   flex: 1,
-   paddingTop: 22
-  },
-  sectionHeader: {
-    paddingTop: 2,
-    paddingLeft: 10,
-    paddingRight: 10,
-    paddingBottom: 2,
-    fontSize: 14,
-    fontWeight: 'bold',
-    backgroundColor: 'rgba(247,247,247,1.0)',
-  },
-  item: {
-    padding: 10,
-    fontSize: 18,
-    height: 44,
-  },
-})
+   
+    titulo: {
+      top: '8%',
+      marginLeft:'-13%',
+      fontSize: 34,
+      marginRight: 'auto',
+      marginLeft: 'auto',
+      },
+
+      input: {
+        fontSize: 18,
+          marginTop:'5%',
+          marginLeft:'0%',
+          width: '80%',
+          borderWidth: 2,
+          padding:'3%',
+          top: '8%',
+        },
+
+        alerta: {
+          top: '80%',
+          marginLeft:'-13%',
+          fontSize: 34,
+          marginRight: 'auto',
+          marginLeft: 'auto',
+          color: 'red',
+          },
+        
+  });

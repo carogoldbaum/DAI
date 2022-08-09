@@ -1,5 +1,6 @@
 {
   "expoServerPort": null,
   "packagerPort": 19000,
-  "webpackServerPort": 19006
+  "webpackServerPort": 19006,
+  "devToolsPort": 19002
 }
