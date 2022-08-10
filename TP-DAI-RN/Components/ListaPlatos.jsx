@@ -1,10 +1,12 @@
 import React from 'react';
-import { SafeAreaView, View, FlatList, StyleSheet, Text, StatusBar, Image } from 'react-native';
+import { SafeAreaView, View, FlatList, StyleSheet, Text, StatusBar, Image, TouchableOpacity } from 'react-native';
 
 const Item = ({ title, image }) => (
+  
   <View style={styles.item}>
     <Text style={styles.title}>{title}</Text>
     <Image style={styles.image} source={image}></Image>
+    
   </View>
 );
 
@@ -13,8 +15,11 @@ const App = (props) => {
   const {onPress, platos} = props
 
   return (
-    <SafeAreaView style={styles.container}>
-      
+    <TouchableOpacity
+
+    onPress={onPress}
+>
+ 
       <FlatList
         data={platos}
         renderItem={({ item }) => <Item title={item.title} image={item.image} />} 
@@ -22,9 +27,9 @@ const App = (props) => {
         //y lo convierte en un componente item y le envia la info del string 
         // a Item y lo muestra en Item
         keyExtractor={item => item.id}
-        onPress={onPress}
+        
       />
-    </SafeAreaView>
+      </TouchableOpacity>
   );
 }
 
@@ -42,8 +47,8 @@ const styles = StyleSheet.create({
     fontSize: 15,
   },
   image: {
-    width: 13
-    
+    width: 70,
+    height:70,
   },
 });
 

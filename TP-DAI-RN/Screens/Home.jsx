@@ -18,7 +18,7 @@ const Home =({navigation})=>{
                 placeholder="Ingrese plato"
 
                 onChangeText={text => {
-                  if(text.length > 1){
+                  if(text.length > 2){
                      GetPlatos(text).then((data) => {
 
                       setPlatos(data)
@@ -33,7 +33,8 @@ const Home =({navigation})=>{
                 }}
             />
             
-                      <App platos={platos}></App>
+                      <App platos={platos}>
+                      </App>
     </View>
     
   );
