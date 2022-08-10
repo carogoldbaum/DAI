@@ -2,13 +2,10 @@ import React, { Component, useEffect, useState, FlatList } from 'react';
 import { StyleSheet, Text, View, TextInput} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { GetPlatos } from '../Axios/AxiosClient';
-import Marvel from '../Components/ListaPlatos';
+import App from '../Components/ListaPlatos';
 
 const Home =({navigation})=>{
-
-  const [userState, setUserState] = useState({
-    plato: ''
-});
+  const [platos, setPlatos] = useState([]); //Setplatos le da el valor a platos
 
   return (
     
@@ -18,37 +15,32 @@ const Home =({navigation})=>{
 
               <TextInput   
                 style={styles.input}
-                value={userState.plato}
                 placeholder="Ingrese plato"
-                onChangeText={text => setUserState({ ...userState, plato: text})}
+
+                onChangeText={text => {
+                  if(text.length > 1){
+                     GetPlatos(text).then((data) => {
+
+                      setPlatos(data)
+
+                  })
+
+                  .catch(() => {
+                    console.log("Datos mal")
+                    
+                });
+                  }
+                }}
             />
             
-          <Marvel
-          onPress={async () =>{
-            
-            if (userState.plato==''){
-              setError(true)
-            }
-              else {
-                await GetPlatos(userState).then(() => {
-                  
-                    navigation.navigate('Login')
-                  
-                })
-                .catch(() => {
-                  console.log("Datos mal")
-                  setError(true)
-                  
-              });
-            
-        }
-      }}  
-            />
+                      <App platos={platos}></App>
     </View>
     
   );
 }
-
+//onPress={ () =>{
+//  navigation.navigate('Login')
+//}}
 export default Home
 
 const styles = StyleSheet.create({

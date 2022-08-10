@@ -22,8 +22,7 @@ export const PostLogIn= async (userState) =>{
 }
 
 export const GetPlatos= async (PlatoBuscado) =>{
-    return axiosClient
-    .get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKey}&query=${PlatoBuscado}`,{})
+    return axiosClient.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=bb614d1a2cfe4751b4f2aea0a3844a1c&query=${PlatoBuscado}`,{})
     .then(function(res){
         console.log(res.data.results)
         return res.data.results

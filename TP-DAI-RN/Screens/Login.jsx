@@ -1,14 +1,14 @@
 import React, { Component, useEffect, useState } from 'react';
 import { StyleSheet, Text, View, TextInput} from 'react-native';
-import BotonIniciarSesion from "../components/BotonIniciarSesion";
+import BotonIniciarSesion from "../Components/BotonIniciarSesion";
 import { useNavigation } from '@react-navigation/native';
 import { PostLogIn } from '../Axios/AxiosClient';
 
 const Login =({navigation})=>{
 
   const [userState, setUserState] = useState({
-    email: '',
-    password: '',
+    email: 'challenge@alkemy.org',
+    password: 'react',
 });
 
     const [error, setError] = React.useState(false);
