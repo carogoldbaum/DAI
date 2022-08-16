@@ -10,7 +10,7 @@ const Item = ({ title, image }) => (
   </View>
 );
 
-const App = (props) => {
+const Flatlist = (props) => {
 
   const {onPress, platos} = props
 
@@ -52,4 +52,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default App;
+export default Flatlist;

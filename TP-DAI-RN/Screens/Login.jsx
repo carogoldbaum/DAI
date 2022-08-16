@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, TextInput} from 'react-native';
 import BotonIniciarSesion from "../Components/BotonIniciarSesion";
 import { useNavigation } from '@react-navigation/native';
 import { PostLogIn } from '../Axios/AxiosClient';
+import {ActionTypes, useContextState} from '../ContextState'
 
 const Login =({navigation})=>{
 
@@ -13,6 +14,7 @@ const Login =({navigation})=>{
 
     const [error, setError] = React.useState(false);
     const [disable, setDisable] = React.useState(false);
+    const { contextState, setContextState} = useContextState();
 
 
   return (
@@ -45,10 +47,15 @@ const Login =({navigation})=>{
               setError(true)
             }
               else {
-                await PostLogIn(userState).then(() => {
+                await PostLogIn(userState).then((token) => {
+                  console.log(token.token)
                     setDisable(false)
-                    navigation.navigate('Home')
-                  
+                   
+                    setContextState({
+                      type: ActionTypes.SetToken,
+                      value: token.token,
+                    });
+                   navigation.navigate('Home')
                 })
                 .catch(() => {
                   console.log("Datos mal")

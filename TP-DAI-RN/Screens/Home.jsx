@@ -2,7 +2,8 @@ import React, { Component, useEffect, useState, FlatList } from 'react';
 import { StyleSheet, Text, View, TextInput} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { GetPlatos } from '../Axios/AxiosClient';
-import App from '../Components/ListaPlatos';
+import Flatlist from '../Components/ListaPlatos';
+
 
 const Home =({navigation})=>{
   const [platos, setPlatos] = useState([]); //Setplatos le da el valor a platos
@@ -20,28 +21,21 @@ const Home =({navigation})=>{
                 onChangeText={text => {
                   if(text.length > 2){
                      GetPlatos(text).then((data) => {
-
                       setPlatos(data)
-
                   })
 
                   .catch(() => {
-                    console.log("Datos mal")
-                    
+                    console.log("Datos mal")   
                 });
                   }
                 }}
             />
             
-                      <App platos={platos}>
-                      </App>
+                      <Flatlist platos={platos}></Flatlist>
     </View>
     
   );
 }
-//onPress={ () =>{
-//  navigation.navigate('Login')
-//}}
 export default Home
 
 const styles = StyleSheet.create({
