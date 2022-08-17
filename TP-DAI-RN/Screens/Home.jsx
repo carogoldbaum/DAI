@@ -1,9 +1,7 @@
-import React, { Component, useEffect, useState, FlatList } from 'react';
+import React, { Component, useEffect, useState, FlatList} from 'react';
 import { StyleSheet, Text, View, TextInput} from 'react-native';
-import { useNavigation } from '@react-navigation/native';
 import { GetPlatos } from '../Axios/AxiosClient';
-import Flatlist from '../Components/ListaPlatos';
-
+import ListaPlatos from '../Components/ListaPlatos';
 
 const Home =({navigation})=>{
   const [platos, setPlatos] = useState([]); //Setplatos le da el valor a platos
@@ -31,7 +29,8 @@ const Home =({navigation})=>{
                 }}
             />
             
-                      <Flatlist platos={platos}></Flatlist>
+            <ListaPlatos navigation={navigation} platos={platos}></ListaPlatos>
+            
     </View>
     
   );

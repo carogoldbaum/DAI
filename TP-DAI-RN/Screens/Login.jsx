@@ -48,7 +48,6 @@ const Login =({navigation})=>{
             }
               else {
                 await PostLogIn(userState).then((token) => {
-                  console.log(token.token)
                     setDisable(false)
                    
                     setContextState({

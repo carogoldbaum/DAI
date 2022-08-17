@@ -1,9 +1,9 @@
-import React from 'react';
+/*import React from 'react';
 import { View, FlatList, StyleSheet, Text, StatusBar, Image, TouchableOpacity } from 'react-native';
 
-const Item = ({ title, image, navigation, id}) => (
+const Item = ({ title, image, navigation}) => (
   <TouchableOpacity
-    onPress={ () =>{ navigation.navigate('DetallePlato',{id:id})}}
+    onPress={ () =>{ navigation.navigate('DetallePlato')}}
   >
    
     <View style={styles.item}>
@@ -16,14 +16,14 @@ const Item = ({ title, image, navigation, id}) => (
 
 const ListaPlatos = (props) => {
 
-  const {navigation, platos} = props
+  const {navigation, Detalle} = props
 
   return (
     <TouchableOpacity>
       <FlatList
 
-        data={platos}
-        renderItem={({ item }) => <Item navigation={navigation} title={item.title} image={item.image} id={item.id} />} 
+        data={Detalle}
+        renderItem={({ item }) => <Item navigation={navigation} title={item.title} image={item.image} />} 
         //agarra el objeto platos y lo separa en cada componente que almacena en item 
         //y lo convierte en un componente item y le envia la info del string 
         // a Item y lo muestra en Item
@@ -53,4 +53,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ListaPlatos;
+export default ListaPlatos;*/

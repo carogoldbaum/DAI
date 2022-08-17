@@ -4,6 +4,7 @@ import { StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import Login from '../Screens/Login';
 import Home from '../Screens/Home';
+import DetallePlato from '../Screens/DetallePlato';
 
 const Stack = createNativeStackNavigator();
 
@@ -23,7 +24,11 @@ const Main = () => {
           name="Home"
           component={Home}
         />
-
+        <Stack.Screen
+          name="DetallePlato"
+          component={DetallePlato}
+        />
+  
       </Stack.Navigator>
     </NavigationContainer>
   );
