@@ -1,36 +1,27 @@
-/*import React from 'react';
-import { View, FlatList, StyleSheet, Text, StatusBar, Image, TouchableOpacity } from 'react-native';
+import React from 'react';
+import { View, FlatList, StyleSheet, Text, StatusBar, Image, TouchableOpacity, Card } from 'react-native';
 
-const Item = ({ title, image, navigation}) => (
-  <TouchableOpacity
-    onPress={ () =>{ navigation.navigate('DetallePlato')}}
+const Item = ({ title, image, descripcion}) => (
+
+   <View
+  
   >
    
     <View style={styles.item}>
       <Text style={styles.title}>{title}</Text>
       <Image style={styles.image} source={image}></Image>
+      <Text style={styles.title}>{descripcion}</Text>
     </View>
 
-  </TouchableOpacity>
+  </View>
 );
 
-const ListaPlatos = (props) => {
+const CardPlato = (props) => {
 
   const {navigation, Detalle} = props
-
+  
   return (
-    <TouchableOpacity>
-      <FlatList
-
-        data={Detalle}
-        renderItem={({ item }) => <Item navigation={navigation} title={item.title} image={item.image} />} 
-        //agarra el objeto platos y lo separa en cada componente que almacena en item 
-        //y lo convierte en un componente item y le envia la info del string 
-        // a Item y lo muestra en Item
-        keyExtractor={item => item.id}
-        
-      />
-      </TouchableOpacity>
+    <Item title={Detalle.title} image={Detalle.image} descripcion={Detalle.summary}/>
   );
 }
 
@@ -53,4 +44,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ListaPlatos;*/
+export default CardPlato;

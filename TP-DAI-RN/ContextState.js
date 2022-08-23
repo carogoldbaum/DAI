@@ -4,11 +4,13 @@ import {useContext} from "react";
 export const initialState = {
     loading: true,
         token: "",
+        menu: "",
 };
 
 export const ActionTypes = {
     SetLoading: "SET_LOADING",
     SetToken: "SET_TOKEN",
+    SetMenu: "SET_MENU",
 };
 
 export const reducer = (state = {}, action) => {
@@ -23,6 +25,11 @@ export const reducer = (state = {}, action) => {
             ...state,
             token: action.value,
         };
+        case ActionTypes.SetMenu:
+            return {
+               ...state,
+               menu: action.value,
+           };
         default:
             return state;
     }

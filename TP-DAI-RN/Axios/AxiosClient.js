@@ -15,14 +15,13 @@ export const PostLogIn= async (userState) =>{
             console.log("Algo no funciona")
         }
     })
-    .catch(function(err) {
-        console.log("No funciona", err)
-        throw err
+    .catch(function(){
+        throw "Error"
     })
 }
 
 export const GetPlatos= async (PlatoBuscado) =>{
-    return axiosClient.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=bb614d1a2cfe4751b4f2aea0a3844a1c&query=${PlatoBuscado}`,{})
+    return axiosClient.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=c847dea61e6b41879dc0d4d960daf224&query=${PlatoBuscado}`,{})
     .then(function(res){
         return res.data.results
     })
@@ -32,9 +31,9 @@ export const GetPlatos= async (PlatoBuscado) =>{
 }
 
 export const GetPlatosCompleto= async (id) =>{
-    return axiosClient.get(`https://api.spoonacular.com/recipes/{id}/information/complexSearch?apiKey=bb614d1a2cfe4751b4f2aea0a3844a1c`,{})
+    return axiosClient.get(`https://api.spoonacular.com/recipes/${id}/information?apiKey=c847dea61e6b41879dc0d4d960daf224`,{})
     .then(function(res){
-        return res.data.results
+        return res.data
     })
     .catch(function(){
         throw "Error"
