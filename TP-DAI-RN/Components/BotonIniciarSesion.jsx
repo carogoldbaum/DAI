@@ -6,7 +6,7 @@ const BotonIniciarSesionInicio = (props) => {
     const { onPress, text, disable } = props
 
     return (
-    
+
         <TouchableOpacity
             disabled={disable}
             style={styles.boton1}
@@ -15,9 +15,9 @@ const BotonIniciarSesionInicio = (props) => {
             <Text style={styles.boton1Text}>
                 {text}
             </Text>
-        
+
         </TouchableOpacity>
-       
+
     )
 }
 
@@ -33,11 +33,11 @@ const styles = StyleSheet.create({
     },
     boton1: {
         backgroundColor: 'white',
-        borderWidth:3,
+        borderWidth: 3,
         borderColor: 'black',
         borderRadius: 70,
         padding: 12,
-        marginTop:'10%',
+        marginTop: '10%',
         width: '47%'
     },
 

@@ -1,27 +1,78 @@
-import React from 'react';
-import { View, FlatList, StyleSheet, Text, StatusBar, Image, TouchableOpacity, Card } from 'react-native';
+import React, { useEffect } from 'react';
+import { View, FlatList, StyleSheet, Text, StatusBar, Image } from 'react-native';
+import { ActionTypes, useContextState } from '../ContextState'
+import BotonAgregar from "../Components/BotonAgregar";
+import BotonEliminar from "../Components/BotonEliminar";
 
-const Item = ({ title, image, descripcion}) => (
-
-   <View
-  
-  >
-   
+const Item = ({ title, image }) => (
+  <View>
     <View style={styles.item}>
       <Text style={styles.title}>{title}</Text>
       <Image style={styles.image} source={image}></Image>
-      <Text style={styles.title}>{descripcion}</Text>
     </View>
-
   </View>
 );
 
 const CardPlato = (props) => {
 
-  const {navigation, Detalle} = props
-  
+  const { navigation, Detalle } = props
+  const { contextState, setContextState } = useContextState();
+
+  let existePlato = contextState.menu.lista.find(plato => plato.id === Detalle.id)
+
   return (
-    <Item title={Detalle.title} image={Detalle.image} descripcion={Detalle.summary}/>
+    <View>
+      <Item title={Detalle.title} image={Detalle.image} />
+      {
+        existePlato
+          ?
+          <>
+            <BotonEliminar style={{ fontSize: 48 }}
+              text="ELIMINAR"
+              onPress={async () => {
+                setContextState({
+                  type: ActionTypes.setEliminarId,
+                  value: Detalle.pricePerServing,
+                });
+
+                setContextState({
+                  type: ActionTypes.setEliminarId,
+                  value: Detalle.healthScore,
+                });
+                setContextState({
+                  type: ActionTypes.setEliminarId,
+                  value: Detalle,
+                });
+                navigation.navigate('Home')
+              }}
+            />
+          </>
+          :
+          <>
+            <BotonAgregar style={{ fontSize: 48 }}
+              text="AGREGAR"
+              onPress={async () => {
+                console.log(Detalle)
+                setContextState({
+                  type: ActionTypes.SetMenuPrecio,
+                  value: Detalle.pricePerServing,
+                });
+
+                setContextState({
+                  type: ActionTypes.SetMenuHealthScore,
+                  value: Detalle.healthScore,
+                });
+                setContextState({
+                  type: ActionTypes.SetMenuLista,
+                  value: Detalle,
+                });
+                navigation.navigate('Home')
+              }}
+            />
+          </>
+      }
+
+    </View>
   );
 }
 
@@ -40,7 +91,7 @@ const styles = StyleSheet.create({
   },
   image: {
     width: 70,
-    height:70,
+    height: 70,
   },
 });
 
