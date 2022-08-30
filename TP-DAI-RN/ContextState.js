@@ -9,7 +9,8 @@ export const initialState = {
         HealthScore: 0,
         lista: [],
         eliminarId: [],
-        igualar: eliminarId,
+        descontarPricePerServing: 0,
+        descontarHealthScore: 0,
     },
 };
 
@@ -21,10 +22,12 @@ export const ActionTypes = {
     SetMenuHealthScore: "SET_MENU_HEALTHSCORE",
     SetMenuLista: "SET_MENU_LISTA",
     SetEliminarId: "SET_ELIMINAR_ID",
-    SetIgualar: "SET_IGUALAR"
+    SetDescontarPricePerServing: "SET_DESCONTAR_PRICE_PER_SERVING",
+    SetDescontarHealthScore: "SET_DESCONTAR_HEALTH_SCORE",
 };
 
 export const reducer = (state = {}, action) => {
+
     switch (action.type) {
         case ActionTypes.SetLoading:
             return {
@@ -59,17 +62,28 @@ export const reducer = (state = {}, action) => {
                     lista: [...state.menu.lista, action.value],
                 }
             };
-        case ActionTypes.SetIgualar:
+        case ActionTypes.SetDescontarPricePerServing:
             return {
                 ...state,
-                igualar: lista,
+                menu: {
+                    ...state.menu,
+                    descontarPricePerServing: action.value,
+                }
+            };
+        case ActionTypes.SetDescontarHealthScore:
+            return {
+                ...state,
+                menu: {
+                    ...state.menu,
+                    descontarHealthScore: action.value,
+                }
             };
         case ActionTypes.SetEliminarId:
             return {
                 ...state,
                 menu: {
                     ...state.menu,
-                    lista: [...state.lista.filter((plato) => plato.id !== action.value)]
+                    lista: state.menu.lista.filter((plato) => plato.id !== action.value)
                 }
             };
         default:
