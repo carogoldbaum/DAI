@@ -47,12 +47,18 @@ export const reducer = (state = {}, action) => {
         case ActionTypes.SetMenuPrecio:
             return {
                 ...state,
-                precio: action.value,
+                menu: {
+                    ...state.menu,
+                    precio: action.value,
+                }
             };
         case ActionTypes.SetMenuHealthScore:
             return {
                 ...state,
-                HealthScore: action.value,
+                menu: {
+                    ...state.menu,
+                    HealthScore: action.value,
+                }
             };
         case ActionTypes.SetMenuLista:
             return {

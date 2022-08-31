@@ -9,15 +9,13 @@ const Item = ({ title, image, pricePerServing, healthScore, vegan }) => (
     <View style={styles.item}>
       <Text style={styles.title}>{title}</Text>
       <Image style={styles.image} source={image}></Image>
-      <Text style={styles.title}>{pricePerServing}</Text>
-      <Text style={styles.title}>{healthScore}</Text>    
- 
-      {vegan ? <Text>El plato es vegano</Text>:<Text>El plato no es vegano</Text>}
+      <Text style={styles.title}>El precio es: {pricePerServing}</Text>
+      <Text style={styles.title}>El healthScore es: {healthScore}</Text>
+
+      {vegan ? <Text>El plato es vegano</Text> : <Text>El plato no es vegano</Text>}
     </View>
   </View>
 );
-
-
 
 const CardPlato = (props) => {
 
@@ -54,28 +52,50 @@ const CardPlato = (props) => {
             />
           </>
           :
-          <>
-            <BotonAgregar style={{ fontSize: 48 }}
-              text="AGREGAR"
-              onPress={async () => {
-                console.log(Detalle)
-                setContextState({
-                  type: ActionTypes.SetMenuPrecio,
-                  value: Detalle.pricePerServing,
-                });
+          contextState.menu.lista.length < 4
+            ?
+            <>
+              <BotonAgregar style={{ fontSize: 48 }}
+                text="AGREGAR"
+                onPress={async () => {
 
-                setContextState({
-                  type: ActionTypes.SetMenuHealthScore,
-                  value: Detalle.healthScore,
-                });
-                setContextState({
-                  type: ActionTypes.SetMenuLista,
-                  value: Detalle,
-                });
-                navigation.navigate('Home')
-              }}
-            />
-          </>
+                  let cantVeganos = 0
+
+                    cantVeganos += Detalle.vegan?1:0
+                    
+                    console.log(cantVeganos)
+
+                  setContextState({
+                    type: ActionTypes.SetMenuPrecio,
+                    value: Detalle.pricePerServing,
+                  });
+
+                  setContextState({
+                    type: ActionTypes.SetMenuHealthScore,
+                    value: Detalle.healthScore,
+                  });
+                  setContextState({
+                    type: ActionTypes.SetMenuLista,
+                    value: Detalle,
+                  });
+                  navigation.navigate('Home')
+                }}
+              />
+            </>
+            :
+            <View>
+              <Text>El menu ya tiene 4 platos</Text>
+              <>
+
+                <BotonAgregar style={{ fontSize: 48 }}
+                  text="VOLVER ATRAS"
+                  onPress={async () => {
+
+                    navigation.navigate('Home')
+                  }}
+                />
+              </>
+            </View>
       }
 
     </View>

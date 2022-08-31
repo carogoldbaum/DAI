@@ -2,9 +2,22 @@ import React, { Component, useEffect, useState, FlatList } from 'react';
 import { StyleSheet, Text, View, TextInput } from 'react-native';
 import { GetPlatos } from '../Axios/AxiosClient';
 import ListaPlatos from '../Components/ListaPlatos';
+import { ActionTypes, useContextState } from '../ContextState'
+import InfoMenu from '../Components/InfoMenu';
 
 const Home = ({ navigation }) => {
   const [platos, setPlatos] = useState([]); //Setplatos le da el valor a platos
+  const { contextState, setContextState } = useContextState();
+
+  useEffect(() => {
+    {
+      contextState.token != ""
+      ?
+      console.log("kdjfgijdbgkujxdgb")
+      :
+      console.log("tokenn mallllllllllllllllllllllllllll")
+    }
+  })
 
   return (
 
@@ -30,6 +43,8 @@ const Home = ({ navigation }) => {
       />
 
       <ListaPlatos navigation={navigation} platos={platos}></ListaPlatos>
+
+      <InfoMenu></InfoMenu>
 
     </View>
 
