@@ -8,7 +8,7 @@ const Item = ({ title, image, pricePerServing, healthScore, vegan }) => (
   <View>
     <View style={styles.item}>
       <Text style={styles.title}>{title}</Text>
-      <Image style={styles.image} source={image}></Image>
+      <Image source={{ uri: image }} style={styles.image} />
       <Text style={styles.title}>El precio es: {pricePerServing}</Text>
       <Text style={styles.title}>El healthScore es: {healthScore}</Text>
 
@@ -35,36 +35,46 @@ const CardPlato = (props) => {
               text="ELIMINAR"
               onPress={async () => {
                 setContextState({
-                  type: ActionTypes.SetDescontarPricePerServing,
+                  type: ActionTypes.SetMenuDescontarPricePerServing,
                   value: Detalle.pricePerServing,
                 });
 
                 setContextState({
-                  type: ActionTypes.SetDescontarHealthScore,
+                  type: ActionTypes.SetMenuDescontarHealthScore,
                   value: Detalle.healthScore,
                 });
                 setContextState({
-                  type: ActionTypes.SetEliminarId,
+                  type: ActionTypes.SetMenuEliminarId,
                   value: Detalle.id,
                 });
                 navigation.navigate('Home')
               }}
             />
           </>
-          :
-          contextState.menu.lista.length < 4
+          : 
+          contextState.menu.lista.length < 4  
             ?
             <>
               <BotonAgregar style={{ fontSize: 48 }}
                 text="AGREGAR"
                 onPress={async () => {
 
-                  let cantVeganos = 0
-
-                    cantVeganos += Detalle.vegan?1:0
-                    
-                    console.log(cantVeganos)
-
+                  let HayVeganos = 0
+                  
+                  for (let i = 0; i < contextState.menu.lista.length; i++) {
+                    Detalle.vegan === true
+                    ?
+                    HayVeganos += contextState.menu.cantVeganos +1
+                  
+                    :
+                    console.log("no es vegano")
+                }
+          
+                HayVeganos >= 1
+                ?        
+                console.log("ya hay 2 veganos, andate"+HayVeganos )
+                :
+                console.log("segui agregando"+HayVeganos )
                   setContextState({
                     type: ActionTypes.SetMenuPrecio,
                     value: Detalle.pricePerServing,
@@ -79,7 +89,7 @@ const CardPlato = (props) => {
                     value: Detalle,
                   });
                   navigation.navigate('Home')
-                }}
+                }}         
               />
             </>
             :
@@ -95,6 +105,7 @@ const CardPlato = (props) => {
                   }}
                 />
               </>
+            
             </View>
       }
 

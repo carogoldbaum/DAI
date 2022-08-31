@@ -11,6 +11,8 @@ export const initialState = {
         eliminarId: [],
         descontarPricePerServing: 0,
         descontarHealthScore: 0,
+        cantVeganos:0,
+        cantNoVeganos:0,
     },
 };
 
@@ -21,9 +23,12 @@ export const ActionTypes = {
     SetMenuPrecio: "SET_MENU_PRECIO",
     SetMenuHealthScore: "SET_MENU_HEALTHSCORE",
     SetMenuLista: "SET_MENU_LISTA",
-    SetEliminarId: "SET_ELIMINAR_ID",
-    SetDescontarPricePerServing: "SET_DESCONTAR_PRICE_PER_SERVING",
-    SetDescontarHealthScore: "SET_DESCONTAR_HEALTH_SCORE",
+    SetMenuEliminarId: "SET_MENU_ELIMINAR_ID",
+    SetMenuDescontarPricePerServing: "SET_MENU_DESCONTAR_PRICE_PER_SERVING",
+    SetMenuDescontarHealthScore: "SET_MENU_DESCONTAR_HEALTH_SCORE",
+    setMenuCantVeganos: "SET_MENU_CANT_VEGANOS",
+    SetMenuCantNoVeganos: "SET_MENU_CANT_NO_VEGANOS"
+    
 };
 
 export const reducer = (state = {}, action) => {
@@ -68,7 +73,7 @@ export const reducer = (state = {}, action) => {
                     lista: [...state.menu.lista, action.value],
                 }
             };
-        case ActionTypes.SetDescontarPricePerServing:
+        case ActionTypes.SetMenuDescontarPricePerServing:
             return {
                 ...state,
                 menu: {
@@ -76,7 +81,7 @@ export const reducer = (state = {}, action) => {
                     descontarPricePerServing: action.value,
                 }
             };
-        case ActionTypes.SetDescontarHealthScore:
+        case ActionTypes.SetMenuDescontarHealthScore:
             return {
                 ...state,
                 menu: {
@@ -84,7 +89,23 @@ export const reducer = (state = {}, action) => {
                     descontarHealthScore: action.value,
                 }
             };
-        case ActionTypes.SetEliminarId:
+            case ActionTypes.setMenuCantVeganos:
+                return {
+                    ...state,
+                    menu: {
+                        ...state.menu,
+                        cantVeganos: action.value,
+                    }
+                };
+                case ActionTypes.SetMenuCantNoVeganos:
+                return {
+                    ...state,
+                    menu: {
+                        ...state.menu,
+                        cantNoVeganos: action.value,
+                    }
+                };
+        case ActionTypes.SetMenuEliminarId:
             return {
                 ...state,
                 menu: {

@@ -5,10 +5,9 @@ const Item = ({ title, image, navigation, id }) => (
   <TouchableOpacity
     onPress={() => { navigation.navigate('DetallePlato', { id: id }) }}
   >
-
     <View style={styles.item}>
       <Text style={styles.title}>{title}</Text>
-      <Image style={styles.image} source={image}></Image>
+      <Image source={{ uri: image }} style={styles.image} />
     </View>
 
   </TouchableOpacity>
@@ -20,7 +19,7 @@ const ListaPlatos = (props) => {
 
   return (
     <TouchableOpacity>
-      <FlatList
+      <FlatList 
 
         data={platos}
         renderItem={({ item }) => <Item navigation={navigation} title={item.title} image={item.image} id={item.id} />}
@@ -37,10 +36,11 @@ const ListaPlatos = (props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: StatusBar.currentHeight || 0,
+    marginTop: 100
   },
   item: {
-    padding: 20,
+    padding: 0,
+    marginTop: 120,
     marginVertical: 8,
     marginHorizontal: 12,
   },

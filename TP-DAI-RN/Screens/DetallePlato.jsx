@@ -14,7 +14,7 @@ const DetallePlato = ({ route, navigation }) => {
   useEffect(() => {
     GetPlatosCompleto(id).then((dataCompleta) => {
       setDetalle(dataCompleta)
-      console.log(dataCompleta)
+
     })
       .catch(() => {
         console.log("Datos mal")
@@ -25,9 +25,9 @@ const DetallePlato = ({ route, navigation }) => {
     {
       contextState.token != ""
         ?
-        console.log("kdjfgijdbgkujxdgb")
+        console.log("")
         :
-        console.log("tokenn mallllllllllllllllllllllllllll")
+        console.log("")
     }
   })
 

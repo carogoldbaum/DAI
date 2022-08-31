@@ -12,10 +12,10 @@ const Home = ({ navigation }) => {
   useEffect(() => {
     {
       contextState.token != ""
-      ?
-      console.log("kdjfgijdbgkujxdgb")
-      :
-      console.log("tokenn mallllllllllllllllllllllllllll")
+        ?
+        console.log("")
+        :
+        console.log("")
     }
   })
 
@@ -41,10 +41,9 @@ const Home = ({ navigation }) => {
           }
         }}
       />
+      <InfoMenu></InfoMenu>
 
       <ListaPlatos navigation={navigation} platos={platos}></ListaPlatos>
-
-      <InfoMenu></InfoMenu>
 
     </View>
 
@@ -64,7 +63,7 @@ const styles = StyleSheet.create({
 
   input: {
     fontSize: 18,
-    marginTop: '5%',
+    marginTop: '49%',
     marginLeft: '0%',
     width: '80%',
     borderWidth: 2,
