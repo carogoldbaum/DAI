@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, FlatList, StyleSheet, Text, StatusBar, Image, Boolean } from 'react-native';
 import { ActionTypes, useContextState } from '../ContextState'
 import BotonAgregar from "../Components/BotonAgregar";
@@ -21,8 +21,25 @@ const CardPlato = (props) => {
 
   const { navigation, Detalle } = props
   const { contextState, setContextState } = useContextState();
+  const [MostrarBoton, setMostrarBoton] = useState(false);
 
   let existePlato = contextState.menu.lista.find(plato => plato.id === Detalle.id)
+
+  useEffect(() => {
+    {
+      let HayVeganos = 0
+
+      for (let i = 0; i < contextState.menu.lista.length; i++) {
+        if (Detalle.vegan === contextState.menu.lista[i].vegan) {
+          HayVeganos += contextState.menu.cantVeganos + 1
+        }
+      }
+
+      if (HayVeganos === 2) {
+        setMostrarBoton(true)
+      }
+    }
+  }, [])
 
   return (
     <View>
@@ -51,8 +68,8 @@ const CardPlato = (props) => {
               }}
             />
           </>
-          : 
-          contextState.menu.lista.length < 4  
+          :
+          contextState.menu.lista.length < 4
             ?
             <>
               <BotonAgregar style={{ fontSize: 48 }}
@@ -60,43 +77,41 @@ const CardPlato = (props) => {
                 onPress={async () => {
 
                   let HayVeganos = 0
-                  
-                  for (let i = 0; i < contextState.menu.lista.length; i++) {
-                    Detalle.vegan === true
-                    ?
-                    HayVeganos += contextState.menu.cantVeganos +1
-                  
-                    :
-                    console.log("no es vegano")
-                }
-          
-                HayVeganos >= 1
-                ?        
-                console.log("ya hay 2 veganos, andate"+HayVeganos )
-                :
-                console.log("segui agregando"+HayVeganos )
-                  setContextState({
-                    type: ActionTypes.SetMenuPrecio,
-                    value: Detalle.pricePerServing,
-                  });
 
-                  setContextState({
-                    type: ActionTypes.SetMenuHealthScore,
-                    value: Detalle.healthScore,
-                  });
-                  setContextState({
-                    type: ActionTypes.SetMenuLista,
-                    value: Detalle,
-                  });
-                  navigation.navigate('Home')
-                }}         
+                  for (let i = 0; i < contextState.menu.lista.length; i++) {
+                    if (Detalle.vegan === contextState.menu.lista[i].vegan) {
+                      HayVeganos += contextState.menu.cantVeganos + 1
+                    }
+                  }
+
+                  if (HayVeganos >= 2) {
+                    setMostrarBoton(true)
+
+                  } else {
+                  
+                    setContextState({
+                      type: ActionTypes.SetMenuPrecio,
+                      value: Detalle.pricePerServing,
+                    });
+
+                    setContextState({
+                      type: ActionTypes.SetMenuHealthScore,
+                      value: Detalle.healthScore,
+                    });
+                    setContextState({
+                      type: ActionTypes.SetMenuLista,
+                      value: Detalle,
+                    });
+                    navigation.navigate('Home')
+                  }
+                }
+                }
               />
             </>
             :
             <View>
               <Text>El menu ya tiene 4 platos</Text>
               <>
-
                 <BotonAgregar style={{ fontSize: 48 }}
                   text="VOLVER ATRAS"
                   onPress={async () => {
@@ -105,8 +120,24 @@ const CardPlato = (props) => {
                   }}
                 />
               </>
-            
             </View>
+      }
+      {MostrarBoton
+        ?
+        <View>
+          <Text>El menu ya tiene 2 platos de ese tipo</Text>
+          <>
+            <BotonAgregar style={{ fontSize: 48 }}
+              text="VOLVER ATRAS, YA HAY 2 DE ESE TIPO"
+              onPress={async () => {
+
+                navigation.navigate('Home')
+              }}
+            />
+          </>
+        </View>
+        :
+        null
       }
 
     </View>

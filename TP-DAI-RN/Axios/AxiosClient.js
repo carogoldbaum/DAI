@@ -21,7 +21,7 @@ export const PostLogIn= async (userState) =>{
 }
 
 export const GetPlatos= async (PlatoBuscado) =>{
-    return axiosClient.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=ac5b22b347044fbd83e38411e9763655&query=${PlatoBuscado}`,{})
+    return axiosClient.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=c8283de8994a476085d2549275d23f5d&query=${PlatoBuscado}`,{})
     .then(function(res){
         return res.data.results
     })
@@ -31,7 +31,7 @@ export const GetPlatos= async (PlatoBuscado) =>{
 }
 
 export const GetPlatosCompleto= async (id) =>{
-    return axiosClient.get(`https://api.spoonacular.com/recipes/${id}/information?apiKey=ac5b22b347044fbd83e38411e9763655`,{})
+    return axiosClient.get(`https://api.spoonacular.com/recipes/${id}/information?apiKey=c8283de8994a476085d2549275d23f5d`,{})
     .then(function(res){
         return res.data
     })
