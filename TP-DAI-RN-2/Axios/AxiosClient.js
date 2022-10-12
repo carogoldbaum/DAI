@@ -1,37 +1,8 @@
 import axios from "axios";
 
-const axiosClient = axios.create({
-    baseURL: "http://challenge-react.alkemy.org/"
-})
 
-export const PostLogIn= async (userState) =>{
-    return axiosClient.post('', {
-        ...userState
-    }).then(response =>{
-        if(response.status < 300){
-            return response.data
-        }
-        else {
-            console.log("Algo no funciona")
-        }
-    })
-    .catch(function(){
-        throw "Error"
-    })
-}
-
-export const GetPlatos= async (PlatoBuscado) =>{
-    return axiosClient.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=79641dc99fba4f21a09af049e9dcbded&query=${PlatoBuscado}`,{})
-    .then(function(res){
-        return res.data.results
-    })
-    .catch(function(){
-        throw "Error"
-    })
-}
-
-export const GetPlatosCompleto= async (id) =>{
-    return axiosClient.get(`https://api.spoonacular.com/recipes/${id}/information?apiKey=79641dc99fba4f21a09af049e9dcbded`,{})
+export const GetClima= async (latitud, longitud) =>{
+    return axios.get(`http://api.weatherunlocked.com/api/current/${latitud},${longitud}?app_id=b41e596c&app_key=34dfbb0f77a5b4dce5abd6ac27eb741d`,{})
     .then(function(res){
         return res.data
     })

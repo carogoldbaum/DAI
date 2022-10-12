@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { FlatList, View, Text, StyleSheet } from "react-native";
+import { FlatList, View, Text, StyleSheet, SafeAreaView } from "react-native";
 import Contact from "../Components/Contact";
 import * as Contacts from "expo-contacts";
 
@@ -7,43 +7,37 @@ const ContactsList = () => {
 
   const [contacts, setContacts] = useState([]);
 
-  useEffect(() => {
+  useEffect(() => { //falta mostrar contacto de emergencia con imagen
     (async () => {
       const { status } = await Contacts.requestPermissionsAsync();
       if (status === "granted") {
         const { data } = await Contacts.getContactsAsync({
-          fields: [Contacts.PHONE_NUMBERS],
+          fields: [Contacts.Fields.Name, Contacts.Fields.PhoneNumbers],
 
         });
         if (data.length > 0) {
           setContacts(data);
-          console.log(data);
         }
       }
     })();
   }, []);
 
-  const keyExtractor = (item, idx) => {
-    return item?.id?.toString() || idx.toString();
-  };
-
-  const renderItem = ({ item, index }) => {
-    return <Contact contact={item} />;
-  };
-
   return (
-    <FlatList
-      data={contacts}
-      renderItem={renderItem}
-      keyExtractor={keyExtractor}
-      style={styles.list}
-    />
+    <SafeAreaView>
+        <FlatList
+            data={contacts}
+            renderItem={(data) => <Contact {...data.item} />}
+            keyExtractor={item => item.id.toString()}
+            style={styles.list}
+        />
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   list: {
-    flex: 1,
+    marginTop: 10
   },
 });
+
 export default ContactsList;

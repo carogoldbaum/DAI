@@ -3,6 +3,7 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import Home from '../Screens/Home';
+import Ubicacion from '../Screens/Ubicacion';
 
 const Stack = createNativeStackNavigator();
 
@@ -10,15 +11,19 @@ const Main = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
-      screenOptions={{
-        headerShown:false
-    }
-    }>
+        screenOptions={{
+          headerShown: false
+        }
+        }>
         <Stack.Screen
           name="Home"
           component={Home}
         />
-  
+
+        <Stack.Screen
+          name="Ubicacion"
+          component={Ubicacion}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

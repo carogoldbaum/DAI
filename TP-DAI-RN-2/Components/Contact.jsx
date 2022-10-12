@@ -1,19 +1,17 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 
-const Contact = ({ contact }) => {
+const Contact = (contact) => {
   return (
 
     <View style={styles.contactCon}>
-    
         <View style={styles.placeholder}>
           <Text style={styles.txt}>{contact?.name}</Text>
         </View>
-  
+      
       <View style={styles.contactDat}>
-        <Text style={styles.name}>{contact?.name}</Text>
         <Text style={styles.phoneNumber}>
-          {contact?.phoneNumbers?.number}
+          {contact?.phoneNumbers && contact?.phoneNumbers[0]?.number}
         </Text>
       </View>
     </View>
