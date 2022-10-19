@@ -4,6 +4,8 @@ import { StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import Home from '../Screens/Home';
 import Ubicacion from '../Screens/Ubicacion';
+import About from '../Screens/About';
+import Contactos from '../Screens/Contactos';
 
 const Stack = createNativeStackNavigator();
 
@@ -13,13 +15,19 @@ const Main = () => {
       <Stack.Navigator
         screenOptions={{
           headerShown: false
-        }
-        }>
+        }} >
         <Stack.Screen
           name="Home"
           component={Home}
         />
-
+        <Stack.Screen
+          name="About"
+          component={About}
+        />
+        <Stack.Screen
+          name="Contactos"
+          component={Contactos}
+        />
         <Stack.Screen
           name="Ubicacion"
           component={Ubicacion}
