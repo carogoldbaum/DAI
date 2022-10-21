@@ -1,9 +1,9 @@
 {
   "expoServerPort": null,
-  "packagerPort": null,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null,
+  "packagerPort": 19000,
+  "expoServerNgrokUrl": "https://67-2gf.anonymous.tp-dai-rn-2.exp.direct",
+  "packagerNgrokUrl": "https://67-2gf.anonymous.tp-dai-rn-2.exp.direct",
+  "ngrokPid": 12700,
   "packagerPid": null,
   "webpackServerPort": null
 }

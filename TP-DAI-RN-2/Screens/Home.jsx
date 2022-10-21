@@ -23,9 +23,9 @@ const Home = ({ navigation }) => {
         }}
       />
       <Boton
-        text="About"
+        text="QRScanner"
         onPress={() => {
-          navigation.navigate('About')
+          navigation.navigate('QRScanner')
         }}
       />
     </View>
