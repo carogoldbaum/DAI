@@ -6,6 +6,7 @@ import Home from '../Screens/Home';
 import Ubicacion from '../Screens/Ubicacion';
 import QRScanner from '../Screens/QRScanner';
 import Contactos from '../Screens/Contactos';
+import ConfiguraciónNumero from  '../Screens/ConfiguraciónNumero';
 
 const Stack = createNativeStackNavigator();
 
@@ -31,6 +32,10 @@ const Main = () => {
         <Stack.Screen
           name="Ubicacion"
           component={Ubicacion}
+        />
+             <Stack.Screen
+          name="ConfiguraciónNumero"
+          component={ConfiguraciónNumero}
         />
       </Stack.Navigator>
     </NavigationContainer>

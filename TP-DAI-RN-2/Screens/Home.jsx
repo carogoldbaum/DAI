@@ -28,6 +28,12 @@ const Home = ({ navigation }) => {
           navigation.navigate('QRScanner')
         }}
       />
+        <Boton
+        text="ConfiguraciónNumero"
+        onPress={() => {
+          navigation.navigate('ConfiguraciónNumero')
+        }}
+      />
     </View>
 
   );

@@ -7,7 +7,7 @@ const ContactsList = () => {
 
   const [contacts, setContacts] = useState([]);
 
-  useEffect(() => { //falta mostrar contacto de emergencia con imagen
+  useEffect(() => {
     (async () => {
       const { status } = await Contacts.requestPermissionsAsync();
       if (status === "granted") {
