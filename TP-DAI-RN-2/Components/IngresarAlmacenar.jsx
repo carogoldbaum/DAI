@@ -1,14 +1,19 @@
 import React, { Component, useEffect, useState } from 'react';
-import { StyleSheet, Text, View, onChangeDate, number, TextInput, onChangeText, onChangeNumber, String, ImageBackground, Button, Alert } from 'react-native';
+import { StyleSheet, Text, View, onChangeDate, number, TextInput, onChangeText, onChangeNumber, String, ImageBackground, Button, Alert, length } from 'react-native';
 import Boton from "../Components/Boton";
 import { useNavigation } from '@react-navigation/native';
+import { ActionTypes, useContextState } from '../ContextState'
 
-const IngresarAlmacenar = ({ navigation }) => {
+const IngresarAlmacenar = ({  }) => {
+  const navigation = useNavigation(); 
 
-  const [Celular, setCelular] = useState();
+  const [userState, setUserState] = useState({
+    Celular: '',
+  });
 
-  const [error, setError] = React.useState(false);
-  const [disable, setDisable] = React.useState(false);
+  const [error, setError] = useState(false);
+
+  const { contextState, setContextState } = useContextState();
 
   return (
     <View>
@@ -17,8 +22,8 @@ const IngresarAlmacenar = ({ navigation }) => {
 
         <TextInput
           style={styles.dato}
-          onChangeText={text => setCelular({Celular: text })}
-          value={Celular}
+          onChangeText={text => setUserState({ ...userState, Celular: text })}
+          value={userState.Celular}
           placeholder="Número de Celular"
           keyboardType="numeric"
         />
@@ -26,22 +31,26 @@ const IngresarAlmacenar = ({ navigation }) => {
         {error && <Text style={styles.alerta}>Completar datos</Text>}
 
         <Boton
-          disable={disable}
           text="CONFIRMAR"
-          
           onPress={ () => {
-            setDisable(true)
-            console.log(Celular)
+            console.log(userState.Celular)
 
-            if (Celular == ''  || Celular.Lenght < 8) {//si hay datos incompletos
+             if (userState.Celular.length < 8 || userState.Celular.length > 8){
               setError(true)
+              console.log("paso como si nada",userState.Celular)
+             
             }
             else {//si hay datos completos
-            
-                console.log("paso todo bien")
+                console.log("paso todo bien", userState.Celular)
+
+                setContextState({
+                  type: ActionTypes.SetNumCelular,
+                  value: userState.Celular,
+                });
+                console.log("info en el contextState", contextState)
+
                 navigation.navigate('Home')
-          
-            } setDisable(false)
+            }    
           }}
         />
     </View>

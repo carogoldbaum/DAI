@@ -9,10 +9,10 @@ const Boton = (props) => {
     
         <TouchableOpacity
 
-            style={styles.RegistrarseInicio}
+            style={styles.estilo}
             onPress={onPress}
         >
-            <Text style={styles.RegistrarseInicioText}>
+            <Text style={styles.texto}>
                 {text}
             </Text>
         
@@ -26,14 +26,14 @@ export default Boton
 
 const styles = StyleSheet.create({
 
-    RegistrarseInicioText: {
+    texto: {
         color: 'white',
         textAlign: 'center',
      
         fontSize: 12,
         width: '100%'
     },
-    RegistrarseInicio: {
+    estilo: {
         backgroundColor: 'black',
         borderRadius: 70,
         padding: 15,
