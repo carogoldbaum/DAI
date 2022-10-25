@@ -7,6 +7,7 @@ import Ubicacion from '../Screens/Ubicacion';
 import QRScanner from '../Screens/QRScanner';
 import Contactos from '../Screens/Contactos';
 import ConfiguraciónNumero from  '../Screens/ConfiguraciónNumero';
+import VideoFav from  '../Screens/VideoFav';
 
 const Stack = createNativeStackNavigator();
 
@@ -36,6 +37,10 @@ const Main = () => {
              <Stack.Screen
           name="ConfiguraciónNumero"
           component={ConfiguraciónNumero}
+        />
+              <Stack.Screen
+          name="VideoFav"
+          component={VideoFav}
         />
       </Stack.Navigator>
     </NavigationContainer>

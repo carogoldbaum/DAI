@@ -34,6 +34,12 @@ const Home = ({ navigation }) => {
           navigation.navigate('ConfiguraciónNumero')
         }}
       />
+           <Boton
+        text="VideoFav"
+        onPress={() => {
+          navigation.navigate('VideoFav')
+        }}
+      />
     </View>
 
   );

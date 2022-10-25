@@ -37,6 +37,9 @@
     "react-native-scan-barcode": "^3.1.7",
     "react-native-screens": "^3.18.2",
     "react-native-svg": "^13.4.0",
+    "react-native-vector-icons": "^9.2.0",
+    "react-native-video": "^2.3.1",
+    "react-native-video-player": "^0.14.0",
     "react-native-vision-camera": "^2.14.1",
     "react-native-web": "~0.18.7",
     "vision-camera-dynamsoft-barcode-reader": "^0.4.4"

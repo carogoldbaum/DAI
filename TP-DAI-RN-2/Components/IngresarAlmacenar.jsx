@@ -28,7 +28,7 @@ const IngresarAlmacenar = ({  }) => {
           keyboardType="numeric"
         />
 
-        {error && <Text style={styles.alerta}>Completar datos</Text>}
+        {error && <Text style={styles.alerta}>ERROR, recorda que solo puede ingresar 8 digitos</Text>}
 
         <Boton
           text="CONFIRMAR"
@@ -48,7 +48,7 @@ const IngresarAlmacenar = ({  }) => {
                   value: userState.Celular,
                 });
                 console.log("info en el contextState", contextState)
-
+                
                 navigation.navigate('Home')
             }    
           }}

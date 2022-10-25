@@ -4,11 +4,13 @@ import { useContext } from "react";
 export const initialState = {
     loading: true,
     numCelular: 0,
+    video: " ",
 };
 
 export const ActionTypes = {
     SetLoading: "SET_LOADING",
-    SetNumCelular: "SET_NUM_CELULAR"
+    SetNumCelular: "SET_NUM_CELULAR",
+    SetVideo: "SET_VIDEO"
 };
 
 export const reducer = (state = {}, action) => {
@@ -24,6 +26,11 @@ export const reducer = (state = {}, action) => {
                 ...state,
                 numCelular: action.value,
             };
+            case ActionTypes.SetVideo:
+                return {
+                    ...state,
+                    video: action.value,
+                };
         default:
             return state;
     }
