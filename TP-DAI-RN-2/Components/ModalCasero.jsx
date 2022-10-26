@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { Alert, Modal, StyleSheet, Text, Pressable, View } from "react-native";
+import { ActionTypes, useContextState } from '../ContextState'
 
 const ModalCasero = ({texto}) => {
 
   const [modalVisible, setModalVisible] = useState(false);
-  
+  const { contextState, setContextState } = useContextState();
+
   return (
     <View style={styles.centeredView}>
       <Modal

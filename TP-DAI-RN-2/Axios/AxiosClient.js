@@ -12,3 +12,15 @@ export const GetClima = async (latitud, longitud) => {
             throw err
         })
 }
+
+export const GetLocation = async (latitud, longitud) => {
+    return axios.get(`https://api.geoapify.com/v1/geocode/reverse?lat=${latitud}&lon=${longitud}&apiKey=cf1e8bbba33e47c2b5b5acaf8f124d8b`)
+        .then(function (res) {
+            console.log('response', res)
+            return res.data
+        })
+        .catch(function (err) {
+            console.log("errottttrrr", err)
+            throw err
+        })
+}
