@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import Boton from "../Components/Boton";
 import { useNavigation } from "@react-navigation/native";
-import { ResizeMode } from "expo-av";
+import { ResizeMode, Video, AVPlaybackStatus } from "expo-av";
 import VideoPlayer from "expo-video-player";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -16,24 +16,26 @@ const IngresarVideo = ({ }) => {
   const navigation = useNavigation();
 
   const [urlGuardada, seturlGuardada] = useState("");
-
+  const video = React.useRef(null);
+  const [status, setStatus] = React.useState({});
   const [url, setUrl] = useState("");
 
-const GuardarURL = async (e) => {
-  if (url == ""){
-    Alert.alert("Ingrese una url")
+  const GuardarURL = async () => {
+    if (url != "") {
+      await AsyncStorage.setItem('String', url)
+    }
+    else {
+      Alert.alert("Ingrese una url")
+    }
   }
-  else {
-    await AsyncStorage.setItem('Url', url)
-  }
-}
 
-useEffect(() => {
-  (async () =>{
-    const UrlSiendoGuardada = await AsyncStorage.getItem('Url')
-    seturlGuardada(UrlSiendoGuardada)
-  })()
-}, [url])
+  useEffect(() => {
+    (async () => {
+
+      const UrlSiendoGuardada = await AsyncStorage.getItem('String')
+      if (UrlSiendoGuardada) seturlGuardada(UrlSiendoGuardada)
+    })()
+  }, [url])
 
   return (
     <View>
@@ -41,7 +43,7 @@ useEffect(() => {
 
       <TextInput
         style={styles.dato}
-        onChangeText={(text) => setUrl({ url: text })}
+        onChangeText={(text) => setUrl(text)}
         value={url}
         placeholder="Ingrese URL"
       />
@@ -50,20 +52,24 @@ useEffect(() => {
         text="CONFIRMAR"
         onPress={() => {
           console.log(urlGuardada);
-          GuardarURL
+          GuardarURL()
         }}
       />
 
+      {url != ""
+        ?
         <VideoPlayer style={{ width: 390, height: 300, }}
           videoProps={{
             shouldPlay: true,
             resizeMode: ResizeMode.CONTAIN,
             source: {
-              uri: urlGuardada
+              uri: url
             },
           }}
         />
-
+        :
+        <Text>Ingrese una URL</Text>
+      }
     </View>
   );
 };
