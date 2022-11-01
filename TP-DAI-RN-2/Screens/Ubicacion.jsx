@@ -31,13 +31,14 @@ const Ubicacion = ({navigation}) => {
             setLatitud(Math.round(location.coords.latitude * 100) / 100)
             setLongitud(Math.round(location.coords.longitude * 100) / 100)
 
-            let ubicacion = await GetLocation(latitud, longitud).then().catch()
-            setLocacion(ubicacion.results.formatted)
+           // let ubicacion = await GetLocation(latitud, longitud)
+           // setLocacion(ubicacion.results.formatted)
 
-           // let resultado = await GetClima(latitud, longitud).then().catch();//hablado en clase, anda pero una vez levantado hay que esperar a que de error y modificar algo(el catch y el then por ejemplo) que involucre la llamada y actualizar
-            //setText(resultado.temp_c)
+           let resultado = await GetClima(latitud, longitud)//hablado en clase, anda pero una vez levantado hay que esperar a que de error y modificar algo(el catch y el then por ejemplo) que involucre la llamada y actualizar
+            setText(resultado.temp_c)
+
             console.log("resuyltado dfgdfhfffffffffffffffffffffffffffffffffffffffffff", locacion)
-            console.log("resuyltado locacionnnnnnnnnnnnnnnnn", ubicacion.results.formatted)
+           // console.log("resuyltado locacionnnnnnnnnnnnnnnnn", ubicacion.results.formatted)
             console.log("resuyltado temperatura", resultado)
             console.log("resuyltado temperaturasfdfsf", resultado.temp_c)
 

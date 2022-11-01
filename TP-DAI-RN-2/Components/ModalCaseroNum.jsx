@@ -65,8 +65,9 @@ const styles = StyleSheet.create({
   },
   button: {
     borderRadius: 20,
-    padding: 10,
-    elevation: 2
+    padding: 20,
+    elevation: 2,
+    marginTop: 90
   },
   buttonOpen: {
     backgroundColor: "#F194FF",
@@ -77,7 +78,8 @@ const styles = StyleSheet.create({
   textStyle: {
     color: "white",
     fontWeight: "bold",
-    textAlign: "center"
+    textAlign: "center",
+    marginTop: -20
   },
   modalText: {
     marginBottom: 17,

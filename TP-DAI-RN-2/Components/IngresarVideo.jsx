@@ -3,26 +3,37 @@ import {
   StyleSheet,
   Text,
   View,
-  Button,
-  onChangeDate,
-  number,
   TextInput,
+  Alert
 } from "react-native";
 import Boton from "../Components/Boton";
 import { useNavigation } from "@react-navigation/native";
-import { ActionTypes, useContextState } from "../ContextState";
-import { Video, AVPlaybackStatus } from "expo-av";
 import { ResizeMode } from "expo-av";
 import VideoPlayer from "expo-video-player";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const IngresarVideo = ({}) => {
+const IngresarVideo = ({ }) => {
   const navigation = useNavigation();
 
-  const [userState, setUserState] = useState({
-    url: "",
-  });
+  const [urlGuardada, seturlGuardada] = useState("");
 
-  const { contextState, setContextState } = useContextState();
+  const [url, setUrl] = useState("");
+
+const GuardarURL = async (e) => {
+  if (url == ""){
+    Alert.alert("Ingrese una url")
+  }
+  else {
+    await AsyncStorage.setItem('Url', url)
+  }
+}
+
+useEffect(() => {
+  (async () =>{
+    const UrlSiendoGuardada = await AsyncStorage.getItem('Url')
+    seturlGuardada(UrlSiendoGuardada)
+  })()
+}, [url])
 
   return (
     <View>
@@ -30,33 +41,29 @@ const IngresarVideo = ({}) => {
 
       <TextInput
         style={styles.dato}
-        onChangeText={(text) => setUserState({ ...userState, url: text })}
-        value={userState.url}
+        onChangeText={(text) => setUrl({ url: text })}
+        value={url}
         placeholder="Ingrese URL"
       />
 
       <Boton
         text="CONFIRMAR"
         onPress={() => {
-          console.log(userState.url);
-
-          setContextState({
-            type: ActionTypes.SetVideo,
-            value: userState.url,
-          });
+          console.log(urlGuardada);
+          GuardarURL
         }}
       />
 
-      <VideoPlayer style={{ width: 390, height: 300,  }}
-        
-        videoProps={{
-          shouldPlay: true,
-          resizeMode: ResizeMode.CONTAIN,
-          source: {
-            uri: contextState.video
-          },
-        }}
-      />
+        <VideoPlayer style={{ width: 390, height: 300, }}
+          videoProps={{
+            shouldPlay: true,
+            resizeMode: ResizeMode.CONTAIN,
+            source: {
+              uri: urlGuardada
+            },
+          }}
+        />
+
     </View>
   );
 };

@@ -4,7 +4,7 @@ import { useContext } from "react";
 export const initialState = {
     loading: true,
     numCelular: 0,
-    video: " ",
+    video: undefined,
 };
 
 export const ActionTypes = {
