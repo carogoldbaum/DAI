@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import Boton from "../Components/Boton";
 import { useNavigation } from "@react-navigation/native";
-import { ResizeMode, Video, AVPlaybackStatus } from "expo-av";
+import { ResizeMode } from "expo-av";
 import VideoPlayer from "expo-video-player";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -16,13 +16,12 @@ const IngresarVideo = ({ }) => {
   const navigation = useNavigation();
 
   const [urlGuardada, seturlGuardada] = useState("");
-  const video = React.useRef(null);
-  const [status, setStatus] = React.useState({});
+
   const [url, setUrl] = useState("");
 
   const GuardarURL = async () => {
     if (url != "") {
-      await AsyncStorage.setItem('String', url)
+      await AsyncStorage.setItem('URL', url)
     }
     else {
       Alert.alert("Ingrese una url")
@@ -32,10 +31,11 @@ const IngresarVideo = ({ }) => {
   useEffect(() => {
     (async () => {
 
-      const UrlSiendoGuardada = await AsyncStorage.getItem('String')
+      const UrlSiendoGuardada = await AsyncStorage.getItem('URL')
       if (UrlSiendoGuardada) seturlGuardada(UrlSiendoGuardada)
+      setUrl(UrlSiendoGuardada)
     })()
-  }, [url])
+  }, [])
 
   return (
     <View>

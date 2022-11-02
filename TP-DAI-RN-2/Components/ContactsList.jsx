@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { FlatList, View, Text, StyleSheet, SafeAreaView } from "react-native";
+import { FlatList, StyleSheet, SafeAreaView } from "react-native";
 import Contact from "../Components/Contact";
 import * as Contacts from "expo-contacts";
 

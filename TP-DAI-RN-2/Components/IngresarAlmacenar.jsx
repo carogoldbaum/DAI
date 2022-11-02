@@ -1,20 +1,34 @@
-import React, { Component, useEffect, useState } from 'react';
-import { StyleSheet, Text, View, onChangeDate, number, TextInput, onChangeText, onChangeNumber, String, ImageBackground, Button, Alert, length } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, Text, View, TextInput, Alert } from 'react-native';
 import Boton from "../Components/Boton";
 import { useNavigation } from '@react-navigation/native';
-import { ActionTypes, useContextState } from '../ContextState'
 import ModalCaseroNum from "../Components/ModalCaseroNum"
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const IngresarAlmacenar = ({  }) => {
   const navigation = useNavigation(); 
 
-  const [userState, setUserState] = useState({
-    Celular: '',
-  });
-
   const [error, setError] = useState(false);
 
-  const { contextState, setContextState } = useContextState();
+  const [Celular, setCelular] = useState("");
+  const [CelularGuardado, setCelularGuardado] = useState("");
+
+  const Guardar = async () => {
+    if (Celular != "") {
+      await AsyncStorage.setItem('numTelefono', Celular)
+    }
+    else {
+      Alert.alert("Ingrese un celular")
+    }
+  }
+
+  useEffect(() => {
+    (async () => {
+
+      const CelularSiendoGuardada = await AsyncStorage.getItem('numTelefono')
+      if (CelularSiendoGuardada) setCelularGuardado(CelularSiendoGuardada)
+    })()
+  }, [Celular])
 
   return (
     <View>
@@ -23,8 +37,8 @@ const IngresarAlmacenar = ({  }) => {
 
         <TextInput
           style={styles.dato}
-          onChangeText={text => setUserState({ ...userState, Celular: text })}
-          value={userState.Celular}
+          onChangeText={text => setCelular( text )}
+          value={Celular}
           placeholder="Número de Celular"
           keyboardType="numeric"
         />
@@ -36,24 +50,21 @@ const IngresarAlmacenar = ({  }) => {
           text="CONFIRMAR"
           
           onPress={ () => {
-            console.log(userState.Celular)
+            console.log(Celular)
             
 
-             if (userState.Celular.length < 8 || userState.Celular.length > 8){
+             if (Celular.length < 8 || Celular.length > 8){
               setError(true)
-              console.log("paso como si nada",userState.Celular)
+              console.log("paso como si nada",Celular)
              
             }
             else {//si hay datos completos
               setError(false)
-                console.log("paso todo bien", userState.Celular)
+                console.log("paso todo bien", Celular)
 
-                setContextState({
-                  type: ActionTypes.SetNumCelular,
-                  value: userState.Celular,
-                });
+                Guardar()
             
-                console.log("info en el contextState", contextState)
+                console.log("info en el AsyncStorage", CelularGuardado)
                 
             }    
           }} 

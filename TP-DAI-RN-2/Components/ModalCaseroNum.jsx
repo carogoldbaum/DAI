@@ -1,11 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Alert, Modal, StyleSheet, Text, Pressable, View } from "react-native";
-import { ActionTypes, useContextState } from '../ContextState'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const ModalCasero = ({}) => {
 
   const [modalVisible, setModalVisible] = useState(false);
-  const { contextState, setContextState } = useContextState();
+  const [CelularGuardado, setCelularGuardado] = useState("");
+
+  useEffect(() => {
+    (async () => {
+
+      const CelularSiendoGuardada = await AsyncStorage.getItem('String')
+      if (CelularSiendoGuardada) setCelularGuardado(CelularSiendoGuardada)
+    })()
+  }, [modalVisible])
 
   return (
     <View style={styles.centeredView}>
@@ -21,7 +29,7 @@ const ModalCasero = ({}) => {
         
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <Text style={styles.modalText}>{contextState.numCelular}</Text>
+            <Text style={styles.modalText}>{CelularGuardado}</Text>
             <Pressable
               style={[styles.button, styles.buttonClose]}
               onPress={() => setModalVisible(!modalVisible)}
